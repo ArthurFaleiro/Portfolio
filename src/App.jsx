@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [contact, setContact] = useState({ nome: '', mensagem: '' });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const assunto = encodeURIComponent(`Contato pelo portfólio - ${contact.nome || 'Site'}`);
+    const corpo = encodeURIComponent(contact.mensagem || '');
+    window.location.href = `mailto:arthurfaleirob@gmail.com?subject=${assunto}&body=${corpo}`;
+  };
+
   return (
     <div id="home">
       {/* NAVBAR */}
@@ -18,15 +27,15 @@ function App() {
       <main className="main-layout">
         {/* COLUNA ESQUERDA (FIXA) */}
         <aside className="left-column">
-          <div className="glass-card" style={{ padding: '10px' }}>
-            <img 
-              src="/Foto.jpg" 
-              alt="Arthur Faleiro" 
+          <div className="photo-frame">
+            <img
+              src="/Foto.jpg"
+              alt="Arthur Faleiro"
               className="arthur-photo"
               onError={(e) => e.target.src="https://via.placeholder.com/300x400?text=Sua+Foto"}
             />
           </div>
-          
+
           <div className="glass-card">
             <p style={{ fontSize: '0.7rem', opacity: 0.6, margin: '0 0 5px' }}>LOCALIZAÇÃO</p>
             <p style={{ margin: 0, fontWeight: 'bold' }}>Canoas, RS</p>
@@ -36,11 +45,16 @@ function App() {
             <p style={{ fontSize: '0.7rem', opacity: 0.6, margin: '0 0 5px' }}>FORMAÇÃO</p>
             <p style={{ margin: 0, fontWeight: 'bold' }}>Engenharia de Software</p>
             <p style={{ margin: 0, fontSize: '0.8rem' }}>PUCRS (Noturno)</p>
-            <p style={{ fontSize: '0.75rem', color: '#FF007F', marginTop: '5px', fontWeight: 'bold' }}>Prev. conclusão: 2027</p>
+            <p style={{ fontSize: '0.75rem', color: 'var(--accent-2)', marginTop: '5px', fontWeight: 'bold' }}>Prev. conclusão: 1º sem. 2028</p>
           </div>
 
-          {/* LINK ATUALIZADO PARA O NOVO CURRÍCULO */}
-          <a href="/Currículo_Arthur.pdf" download className="nav-box" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>
+          <div className="glass-card">
+            <p style={{ fontSize: '0.7rem', opacity: 0.6, margin: '0 0 5px' }}>IDIOMA</p>
+            <p style={{ margin: 0, fontWeight: 'bold' }}>Inglês Avançado</p>
+            <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.8 }}>Certificação Wizard Proficiency</p>
+          </div>
+
+          <a href="/Curriculo_Arthur.pdf" download className="nav-box" style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>
             📄 Baixar Currículo PDF
           </a>
         </aside>
@@ -50,9 +64,15 @@ function App() {
           <div style={{ marginBottom: '60px' }}>
             <span className="move-badge">EU SOU</span>
             <h1 style={{ fontSize: '3.5rem', margin: '20px 0', lineHeight: '1.2' }}>
-              Designer & Dev <br/>
-              <span style={{ color: '#FF007F' }}>Full Stack</span> apaixonado por inovação.
+              Full Stack Developer <br/>
+              apaixonado por <span style={{ color: 'var(--accent-2)' }}>resolver problemas reais</span> com código.
             </h1>
+            <p style={{ maxWidth: '620px', opacity: 0.85, fontSize: '1rem', lineHeight: '1.7', marginBottom: '20px' }}>
+              Comecei na área de tecnologia dando suporte de TI no dia a dia de um hospital, resolvendo problemas de sistemas
+              em produção — foi ali que percebi que queria construir as soluções, não só mantê-las. Hoje curso Engenharia de
+              Software na PUCRS, atuo como desenvolvedor na Trisolutions e exploro Inteligência Artificial e Prompt Engineering
+              para acelerar como transformo ideias em software que funciona.
+            </p>
             <div style={{ marginTop: '20px' }}>
               <span className="move-badge">Inovar</span>
               <span className="move-badge">Construir</span>
@@ -61,25 +81,44 @@ function App() {
             </div>
           </div>
 
-          {/* SEÇÃO EXPERIÊNCIAS (RECUPERADA) */}
+          {/* SEÇÃO EXPERIÊNCIAS */}
           <div id="experiencia" style={{ marginBottom: '50px' }}>
             <h3 style={{ opacity: 0.5, fontSize: '0.8rem', letterSpacing: '2px', marginBottom: '20px' }}>EXPERIÊNCIAS</h3>
-            
+
             <div className="glass-card">
-              <p style={{ color: '#FF007F', fontSize: '0.75rem', fontWeight: 'bold' }}>2024 - MOMENTO</p>
-              <h4>Assistente de Suporte TI - Santa Casa de Porto Alegre</h4>
+              <p style={{ color: 'var(--accent-2)', fontSize: '0.75rem', fontWeight: 'bold' }}>JUN 2026 - MOMENTO · REMOTO</p>
+              <h4>Desenvolvedor de Software (Estágio) - Trisolutions</h4>
               <ul style={{ fontSize: '0.85rem', paddingLeft: '20px', opacity: 0.8, lineHeight: '1.6' }}>
-                <li>Suporte ao sistema TASY e manutenção de hardware.</li>
-                <li>Abertura de ordens de serviço e gestão de usuários.</li>
+                <li>Manutenção e evolução de sistemas corporativos: correção de bugs e novas funcionalidades.</li>
+                <li>Desenvolvimento com Java, JavaScript e PHP, com consultas em banco de dados Firebird.</li>
+                <li>Versionamento com Git (Bitbucket/SourceTree) e gestão de demandas via Jira.</li>
               </ul>
             </div>
 
-            {/* EXPERIÊNCIA APPMAX RECUPERADA */}
             <div className="glass-card">
-              <p style={{ color: '#FF007F', fontSize: '0.75rem', fontWeight: 'bold' }}>2022 - 2023</p>
+              <p style={{ color: 'var(--accent-2)', fontSize: '0.75rem', fontWeight: 'bold' }}>MAR 2026 - MOMENTO</p>
+              <h4>Desenvolvedor Full Stack (Aprendiz) - AGES PUCRS</h4>
+              <ul style={{ fontSize: '0.85rem', paddingLeft: '20px', opacity: 0.8, lineHeight: '1.6' }}>
+                <li>Projeto AGES I: "Uma Porto Alegre Alemã" — TypeScript, NestJS e Figma.</li>
+                <li>Desenvolvimento de APIs (back-end) e implementação de interfaces (front-end).</li>
+                <li>Integração entre sistemas em squad ágil.</li>
+              </ul>
+            </div>
+
+            <div className="glass-card">
+              <p style={{ color: 'var(--accent-2)', fontSize: '0.75rem', fontWeight: 'bold' }}>MAR 2024 - MAI 2026</p>
+              <h4>Assistente de Suporte TI - Santa Casa de Porto Alegre</h4>
+              <ul style={{ fontSize: '0.85rem', paddingLeft: '20px', opacity: 0.8, lineHeight: '1.6' }}>
+                <li>Suporte ao sistema de saúde TASY e manutenção de hardware.</li>
+                <li>Abertura de ordens de serviço e gestão de contas de usuários.</li>
+              </ul>
+            </div>
+
+            <div className="glass-card">
+              <p style={{ color: 'var(--accent-2)', fontSize: '0.75rem', fontWeight: 'bold' }}>MAI 2022 - DEZ 2023</p>
               <h4>Jovem Aprendiz - Appmax</h4>
               <ul style={{ fontSize: '0.85rem', paddingLeft: '20px', opacity: 0.8, lineHeight: '1.6' }}>
-                <li>Credenciamento de Empresas (3 meses).</li>
+                <li>Credenciamento de empresas parceiras (3 meses).</li>
                 <li>Atuação no setor Jurídico / Débito e Crédito (1 ano e 9 meses).</li>
               </ul>
             </div>
@@ -116,13 +155,13 @@ function App() {
               </div>
 
               <div className="glass-card">
-                <h4>StreetWise Concessionária</h4>
-                <p style={{ fontSize: '0.8rem', opacity: 0.7 }}>E-commerce fictício de veículos elétricos.</p>
+                <h4>Arquitetura Clean & DDD (PAS)</h4>
+                <p style={{ fontSize: '0.8rem', opacity: 0.7 }}>Backend Java com Clean Architecture, DDD e microsserviço de conversão de moeda.</p>
                 <div className="project-tags">
-                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" className="tag-icon" alt="HTML"/>
-                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" className="tag-icon" alt="React"/>
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" className="tag-icon" alt="Java"/>
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" className="tag-icon" alt="Spring"/>
                 </div>
-                <a href="https://github.com/ArthurFaleiro/Sistema-StreetWise" target="_blank" rel="noreferrer" className="btn-project">
+                <a href="https://github.com/ArthurFaleiro/projac" target="_blank" rel="noreferrer" className="btn-project">
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="14" style={{ filter: 'invert(1)', marginRight: '8px' }} alt=""/>
                   Acessar projeto
                 </a>
@@ -144,7 +183,7 @@ function App() {
         </section>
       </main>
 
-      {/* SEÇÃO LET'S TALK (RECUPERADA) */}
+      {/* SEÇÃO LET'S TALK */}
       <footer id="contato" style={{ padding: '100px 10%' }}>
         <h2 className="talk-title">Let's talk</h2>
         <div className="contact-grid">
@@ -155,9 +194,20 @@ function App() {
           </div>
           <div className="glass-card">
             <p style={{ marginBottom: '20px', fontWeight: 'bold' }}>Me envie uma mensagem</p>
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <input type="text" placeholder="Seu nome" className="contact-input" />
-              <textarea placeholder="Sua mensagem..." className="contact-textarea"></textarea>
+            <form style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Seu nome"
+                className="contact-input"
+                value={contact.nome}
+                onChange={(e) => setContact({ ...contact, nome: e.target.value })}
+              />
+              <textarea
+                placeholder="Sua mensagem..."
+                className="contact-textarea"
+                value={contact.mensagem}
+                onChange={(e) => setContact({ ...contact, mensagem: e.target.value })}
+              ></textarea>
               <button type="submit" className="nav-box submit-btn">Enviar mensagem</button>
             </form>
           </div>
