@@ -1,16 +1,22 @@
 /* RESET BÁSICO - Garante que nada herde tamanhos indesejados */
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --accent: #7C5CFC;
+  --accent-2: #38BDF8;
+  --accent-soft: rgba(124, 92, 252, 0.35);
 }
 
 body {
   font-family: 'Inter', sans-serif;
   color: white;
-  background: linear-gradient(-45deg, #9600CD, #5416B4, #FF007F, #2813B2);
+  background: linear-gradient(-45deg, #05060f, #1B1140, #2A1B6E, #0B3D91);
   background-size: 400% 400%;
-  animation: gradientBG 12s ease infinite;
+  animation: gradientBG 16s ease infinite;
   min-height: 100vh;
   scroll-behavior: smooth;
   overflow-x: hidden; /* Evita barra de rolagem horizontal */
@@ -31,9 +37,10 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 8%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(5, 6, 15, 0.65);
   backdrop-filter: blur(15px);
   z-index: 2000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .nav-box-container { display: flex; gap: 15px; }
@@ -52,8 +59,8 @@ body {
 
 .nav-box:hover {
   transform: scale(1.05);
-  background: rgba(255, 0, 127, 0.3);
-  border-color: #FF007F;
+  background: var(--accent-soft);
+  border-color: var(--accent);
 }
 
 /* LAYOUT PRINCIPAL - USANDO FLEX PARA EVITAR SOBREPOSIÇÃO */
@@ -67,20 +74,33 @@ body {
 }
 
 /* COLUNA ESQUERDA (FIXA) */
-.left-column { 
+.left-column {
   width: 320px; /* Tamanho fixo e controlado */
   flex-shrink: 0; /* Impede que a coluna amasse em telas menores */
-  position: sticky; 
-  top: 100px; 
-  height: fit-content; 
+  position: sticky;
+  top: 100px;
+  height: fit-content;
   z-index: 10;
 }
 
-/* Estilo específico para a imagem do Arthur */
+/* Moldura circular da foto, com anel em degradê azul + roxo */
+.photo-frame {
+  width: 190px;
+  height: 190px;
+  margin: 10px auto 20px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 35px var(--accent-soft);
+}
+
 .arthur-photo {
-  width: 100%; 
-  border-radius: 15px; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
   display: block;
+  border: 3px solid #0a0a18;
 }
 
 /* CONTEÚDO DA DIREITA */
@@ -91,12 +111,16 @@ body {
 
 /* ESTILO DOS CARDS (Glassmorphism) */
 .glass-card {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(10, 8, 30, 0.35);
   border-radius: 20px;
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 25px; /* Espaço entre os cards */
   transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--accent-soft);
 }
 
 /* GRID DE PROJETOS - SEGURO E RESPONSIVO */
@@ -147,10 +171,10 @@ body {
 }
 
 .btn-project:hover {
-  background: #FF007F;
-  border-color: #FF007F;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
+  box-shadow: 0 5px 18px var(--accent-soft);
 }
 
 .move-badge {
@@ -184,6 +208,10 @@ footer {
   font-weight: 200;
   margin: 0 0 50px;
   text-align: left;
+  background: linear-gradient(135deg, #ffffff, var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .contact-grid {
@@ -199,6 +227,12 @@ footer {
   color: white;
   border-radius: 8px;
   width: 100%;
+  font-family: inherit;
+}
+
+.contact-input:focus, .contact-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
 }
 
 .contact-textarea {
@@ -207,11 +241,15 @@ footer {
 }
 
 .submit-btn {
-  background: white !important;
-  color: black !important;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
+  color: white !important;
   font-weight: bold !important;
   cursor: pointer;
   border: none !important;
+}
+
+.submit-btn:hover {
+  box-shadow: 0 5px 18px var(--accent-soft);
 }
 
 @media (max-width: 900px) {
